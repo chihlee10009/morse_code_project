@@ -10,7 +10,8 @@ import random
 #        If i get it correct then system plays the correct morse code sound
 #DONE: have program randomly print a letter where I have to respond with morse
 #DONE: plays the morse
-#TODO: have program randomly print a morse and i have to respond with a letter
+#TODO:
+#DONE: have program randomly print a morse and i have to respond with a letter
 #TODO: review method for playing sound after typing the letter and code correctly
 #TODO: program keeps running after first correct input
 #        ask user if he wants to quit program by typing quit
@@ -149,6 +150,25 @@ class Morse_code:
     continue_game = input("y/n: ")
     if continue_game == "y":
       self.random_letter()
+
+  def random_morse(self):
+    self.get_random_letter_and_code()
+    print(self.code)
+    user_letter = input("insert letter for this morse code:\n>>")
+
+    while user_letter != self.letter:
+      print("Wrong! Try again!:")
+      user_letter = input("insert letter for this morse code:\n>>")
+
+    print("Great Job!")
+    self.morse_msg = self.code
+    self.play_sound()
+
+    print("ready for another?")
+    continue_game = input("y/n: ")
+    if continue_game == "y":
+      self.random_morse()
+
 
       
 
