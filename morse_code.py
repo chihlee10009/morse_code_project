@@ -8,7 +8,7 @@ import random
 #        I have to input the letter and code back
 #        if I get it incorrect the program says try again 
 #        If i get it correct then system plays the correct morse code sound
-#TODO: have program randomly print a letter where I have to respond with morse
+#DONE: have program randomly print a letter where I have to respond with morse
 #TODO: have program randomly print a morse and i have to respond with a letter
 #TODO: review method for playing sound after typing the letter and code correctly
 #TODO: program keeps running after first correct input
@@ -108,25 +108,49 @@ class Morse_code:
         os.system("powershell.exe [System.Console]::Beep(500, 800)")
       elif sound == " ":
         time.sleep(1)
-  
-  def morse_code_learning(self):
+
+  def get_random_letter_and_code(self):
     num = random.randint(0, 26)
     keys = self.morse_code.keys()
     keys = list(keys)
     
-    letter = keys[num]
-    code = self.morse_code[letter]
+    self.letter = keys[num]
+    self.code = self.morse_code[self.letter]
+
+  def morse_code_learning(self):
+    self.get_random_letter_and_code()
     
-    print(letter, code)
+    print(self.letter, self.code)
     repeat_letter_code = input("input the letter and code\n")
     
-    while repeat_letter_code != letter + " " + code:
+    while repeat_letter_code != self.letter + " " + self.code:
       print("try again!")
       repeat_letter_code = input("input the letter and code\n")
     
     print("well done!")
-    self.morse_msg = code
+    self.morse_msg = self.code
     self.play_sound()
+
+  def random_letter(self):
+    self.get_random_letter_and_code()
+    print(self.letter)
+    user_morse = input("insert morse code for this letter\n>>")
+    
+    while user_morse != self.code:
+      print("Wrong! Try again!")
+      user_morse = input("insert morse code for this letter\n>>")
+    
+    print("Great Job!")
+
+    print("ready for another?")
+    continue_game = input("y/n: ")
+    if continue_game == "y":
+      self.random_letter()
+
+      
+
+  
+
 
 
   
