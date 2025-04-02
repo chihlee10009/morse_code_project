@@ -9,12 +9,18 @@ import random
 #        if I get it incorrect the program says try again 
 #        If i get it correct then system plays the correct morse code sound
 #DONE: have program randomly print a letter where I have to respond with morse
-#DONE: plays the morse
-#TODO:
+#        plays the morse
 #DONE: have program randomly print a morse and i have to respond with a letter
-#TODO: review method for playing sound after typing the letter and code correctly
-#TODO: program keeps running after first correct input
+#        plays the morse
+#DONE: program keeps running after first correct input
 #        ask user if he wants to quit program by typing quit
+#DONE: Play game 1 {letter_and_morse}, game 2{morse_to_letter}, game 3{letter_to_morse}
+#        new method to select bewteen games 1 through 3
+#TODO: have program figure out whether it's running on a Windows or Mac?
+#       if on windows system then use Windows sounds
+#       if on mac system the use mac sounds
+
+
 class Morse_code:   
 #python Dictionary
 #can only have 1 __init__ method per class
@@ -119,7 +125,7 @@ class Morse_code:
     self.letter = keys[num]
     self.code = self.morse_code[self.letter]
 
-  def morse_code_learning(self):
+  def letter_and_morse(self):
     self.get_random_letter_and_code()
     
     print(self.letter, self.code)
@@ -133,7 +139,7 @@ class Morse_code:
     self.morse_msg = self.code
     self.play_sound()
 
-  def random_letter(self):
+  def random_letter_to_morse(self):
     self.get_random_letter_and_code()
     print(self.letter)
     user_morse = input("insert morse code for this letter\n>>")
@@ -151,7 +157,7 @@ class Morse_code:
     if continue_game == "y":
       self.random_letter()
 
-  def random_morse(self):
+  def random_morse_to_letter(self):
     self.get_random_letter_and_code()
     print(self.code)
     user_letter = input("insert letter for this morse code:\n>>")
@@ -169,17 +175,31 @@ class Morse_code:
     if continue_game == "y":
       self.random_morse()
 
+  def game_selection(self, game_number):
+    if game_number == "1":
+      self.letter_and_morse()
 
-      
+    elif game_number == "2":
+      self.random_letter_to_morse()
 
-  
+    elif game_number == "3":
+      self.random_morse_to_letter()
 
+    elif game_number == "0":
+      exit() 
 
+    else:
+      print("wrong selection! please input 0 to 3")
 
-  
-  
+  def user_game_selection(self):
+    while True:
+      user_game_input = input("please input 0 to 3:\n>>")
+      self.game_selection(user_game_input)
 
-morse_obj = Morse_code()
-#morse_obj.english_to_morse_code()
-#morse_obj.morse_code_to_english()
-morse_obj.morse_code_learning()
+if __name__ == "__main__":
+  morse_obj = Morse_code()
+  morse_obj.user_game_selection()
+
+  #morse_obj.english_to_morse_code()
+  #morse_obj.morse_code_to_english()
+  #morse_obj.morse_code_learning()
